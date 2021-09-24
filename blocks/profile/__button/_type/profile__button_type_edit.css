@@ -1,0 +1,13 @@
+.profile__button_type_edit {
+  max-width: 24px;
+  max-height: 24px;
+  grid-area: edit;
+  background-image: url(../../../../images/icons/pencil_icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border-width: 1px;
+  padding-left: 0;
+  padding-right: 20px;
+  margin-top: 37px;
+  margin-left: 18px;
+}

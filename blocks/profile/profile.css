@@ -1,0 +1,9 @@
+.profile {
+  display: grid;
+  grid-template-columns: 150px auto 1fr 150px ;
+  grid-template-rows: min-content ;
+  grid-template-areas: 
+  "image name edit add"
+  "image info info add";
+  margin: 40px 0 50px;
+}
