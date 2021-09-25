@@ -1,0 +1,6 @@
+.image-card__image {
+  grid-area: image;
+  width: 100%;
+  object-fit: fill;
+  background-position: center;
+}
