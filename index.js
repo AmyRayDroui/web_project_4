@@ -1,17 +1,17 @@
-const openEditButton = document.querySelector('.profile__button_type_edit');
-const popup = document.querySelector('.popup');
-const closeEditButton = popup.querySelector('.popup__close-button');
-const pageWrapper = document.querySelector('.page__wrapper');
+let openEditButton = document.querySelector('.profile__button_type_edit');
+let popup = document.querySelector('.popup');
+let closeEditButton = popup.querySelector('.popup__close-button');
+let pageWrapper = document.querySelector('.page__wrapper');
 
-const loveButtons = document.querySelectorAll('.image-card__love-button');
+let loveButtons = document.querySelectorAll('.image-card__love-button');
 
-const form = document.querySelector('.popup__form');
+let form = document.querySelector('.popup__form');
 
-const profileName = document.querySelector('.profile__name');
-const profileInfo = document.querySelector('.profile__info');
+let profileName = document.querySelector('.profile__name');
+let profileInfo = document.querySelector('.profile__info');
 
-const inputName = document.querySelector('.popup__input_type_name');
-const inputInfo = document.querySelector('.popup__input_type_info'); 
+let inputName = document.querySelector('.popup__input_type_name');
+let inputInfo = document.querySelector('.popup__input_type_info'); 
 
 
 function toggleForm() {
