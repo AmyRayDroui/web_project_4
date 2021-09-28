@@ -3,7 +3,7 @@
   grid-template-areas: 
   "image container add"
   "image info add";
-  grid-template-columns: 150px 1fr 150px ;
+  grid-template-columns: 150px 1fr 150px;
   margin: 40px 0 50px;
 }
 
@@ -14,8 +14,8 @@
     "container"
     "info"
     "add";
-    grid-template-columns: auto  ;
-    grid-template-rows: min-content ;
+    grid-template-columns: auto;
+    grid-template-rows: min-content;
     justify-items: center;
     margin: 42px 19px 36px;
   }
