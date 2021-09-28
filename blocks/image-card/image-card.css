@@ -11,3 +11,9 @@
   "image image"
   "name button";
 }
+
+@media screen and (max-width:650px){
+  .image-card {
+    margin: 0 auto;
+  }
+}

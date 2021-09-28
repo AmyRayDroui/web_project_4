@@ -11,3 +11,10 @@
   margin-top: 37px;
   margin-left: 18px;
 }
+
+@media screen and (max-width:650px){
+  .profile__button_type_edit {
+    justify-self: start;
+    margin-top: 0;
+  }
+}

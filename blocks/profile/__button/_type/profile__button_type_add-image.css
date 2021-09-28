@@ -9,3 +9,12 @@
   margin-top: 35px;
   margin-left: 18px;
 }
+
+@media screen and (max-width:650px){
+  .profile__button_type_add-image {
+    min-width: 100%;
+    background-size: 16px;
+    padding-bottom: 50px;
+    margin: 36px 0 0;
+  }
+}
