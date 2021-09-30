@@ -5,7 +5,7 @@
   line-height: 1.21;
   padding-bottom: 13px;
   border: none;
-  border-bottom: 1px black solid;
+  border-bottom: 1px rgba(0,0,0,.2) solid;
   margin-bottom: 30px;
 }
 

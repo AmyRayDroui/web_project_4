@@ -1,6 +1,7 @@
 .profile__button {
-  background-color: black;
+  background-color: transparent;
   border: white solid;
+  cursor: pointer;
   transition: opacity .3s ease-in-out;
 }
 

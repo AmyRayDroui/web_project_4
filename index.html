@@ -14,43 +14,43 @@
     <main class="content">
       <section class="profile">
         <img src="./images/profile-image/Jacques.jpg" alt="Jacques's photo" class="profile__image">
-        <div class="profile__container overflow-block">
-          <h1 class="profile__name overflow-block">Jacques Cousteau</h1>
-          <button class="profile__button profile__button_type_edit"></button>
+        <div class="profile__container profile__overflow-element">
+          <h1 class="profile__name profile__overflow-element">Jacques Cousteau</h1>
+          <button type="button" class="profile__button profile__button_type_edit" aria-label="Edit profile"></button>
         </div>
-        <p class="profile__info overflow-block">Explorer</p>
-        <button class="profile__button profile__button_type_add-image"></button>
+        <p class="profile__info profile__overflow-element">Explorer</p>
+        <button type="button" class="profile__button profile__button_type_add-image" aria-label="Add image"></button>
       </section>
       <section class="images-container">
         <div class="image-card">
           <img src="./images/card-image/yosemite.jpg" alt="image of Yosemite valley" class="image-card__image">
           <h2 class="image-card__name overflow-block">Yosemite Valley</h2>
-          <button class="image-card__love-button"></button>
+          <button type="button" class="image-card__love-button" aria-label="Like an image"></button>
         </div>
         <div class="image-card">
           <img src="./images/card-image/louise.jpg" alt="image of lake Louise" class="image-card__image">
           <h2 class="image-card__name overflow-block">Lake Louise</h2>
-          <button class="image-card__love-button"></button>
+          <button type="button" class="image-card__love-button" aria-label="Like an image"></button>
         </div>
         <div class="image-card">
           <img src="./images/card-image/bald.jpg" alt="image of the bald mountains" class="image-card__image">
           <h2 class="image-card__name overflow-block">Bald Mountains</h2>
-          <button class="image-card__love-button"></button>
+          <button type="button" class="image-card__love-button" aria-label="Like an image"></button>
         </div>
         <div class="image-card">
           <img src="./images/card-image/latemar.jpg" alt="image of Latemar" class="image-card__image">
           <h2 class="image-card__name overflow-block">Latemar</h2>
-          <button class="image-card__love-button"></button>
+          <button type="button" class="image-card__love-button" aria-label="Like an image"></button>
         </div>
         <div class="image-card">
           <img src="./images/card-image/vanoise.jpg" alt="image of vanoise national park" class="image-card__image">
           <h2 class="image-card__name overflow-block">Vanoise National park</h2>
-          <button class="image-card__love-button"></button>
+          <button type="button" class="image-card__love-button" aria-label="Like an image"></button>
         </div>
         <div class="image-card">
           <img src="./images/card-image/baries.jpg" alt="image of lago di baries" class="image-card__image">
           <h2 class="image-card__name overflow-block">Lago di Braies</h2>
-          <button class="image-card__love-button"></button>
+          <button type="button" class="image-card__love-button" aria-label="Like an image"></button>
         </div>
       </section>
     </main>
@@ -59,14 +59,16 @@
     </footer>
   </div>
   <div class="popup">
-    <button type="button" class="popup__close-button"></button>
-    <h2 class="popup__title">Edit profile</h2>
-    <form class="popup__form" name="edit-profile">
-      <input type="text" name="name" class="popup__input popup__input_type_name">
-      <input type="text" name="info" class="popup__input popup__input_type_info">
-      <button type="submit" class="popup__save-button">Save</button>
-    </form>
-  </div> 
-  <script src="./index.js"></script>
+    <div class="popup__container">
+      <button type="button" class="popup__close-button" aria-label="Close popup"></button>
+      <h2 class="popup__title">Edit profile</h2>
+      <form class="popup__form" name="edit-profile">
+        <input type="text" name="name" class="popup__input popup__input_type_name" required>
+        <input type="text" name="info" class="popup__input popup__input_type_info" required>
+        <button type="submit" class="popup__save-button" aria-label="Submit">Save</button>
+      </form>
+    </div> 
+  </div>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>

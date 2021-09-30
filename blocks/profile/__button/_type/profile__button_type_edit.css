@@ -1,20 +1,21 @@
 .profile__button_type_edit {
-  max-width: 24px;
+  min-width: 24px;
   max-height: 24px;
   grid-area: edit;
   background-image: url(../../../../images/icons/pencil_icon.svg);
   background-repeat: no-repeat;
   background-position: center;
   border-width: 1px;
-  padding-left: 0;
-  padding-right: 20px;
-  margin-top: 37px;
-  margin-left: 18px;
+  padding: 0; 
+  margin: 37px 18px 0;
 }
 
 @media screen and (max-width:650px){
   .profile__button_type_edit {
     justify-self: start;
-    margin-top: 0;
+    min-width: 18px;
+    max-height: 18px;
+    background-size: 8px;
+    margin: 3px 0 0 10px;
   }
 }

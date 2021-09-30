@@ -14,26 +14,31 @@ let inputName = document.querySelector('.popup__input_type_name');
 let inputInfo = document.querySelector('.popup__input_type_info'); 
 
 
-function toggleForm() {
+function openForm() {
   inputName.value = profileName.textContent;
   inputInfo.value = profileInfo.textContent;
   popup.classList.toggle('popup_visible');
-  pageWrapper.classList.toggle('page__wrapper_opaque');
+}
+
+function closeForm() {
+  popup.classList.toggle('popup_visible');
 }
 
 function handleFormSubmit(event) {
   event.preventDefault();
   profileName.textContent = inputName.value;
   profileInfo.textContent = inputInfo.value;
+  closeForm();
 }
 
-loveButtons.forEach((button) => {
+//commented for the reviewer's request
+/*loveButtons.forEach((button) => {
   button.addEventListener('click', (event)=> {
     event.target.classList.toggle('image-card__love-button_active');
   })
-});
+});*/
 
-openEditButton.addEventListener('click', toggleForm);
-closeEditButton.addEventListener('click', toggleForm); 
+openEditButton.addEventListener('click', openForm);
+closeEditButton.addEventListener('click', closeForm); 
 
 form.addEventListener('submit', handleFormSubmit);
