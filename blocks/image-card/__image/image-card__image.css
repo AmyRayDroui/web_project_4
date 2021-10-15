@@ -1,6 +1,11 @@
 .image-card__image {
   grid-area: image;
+  box-sizing: border-box;
+  padding-top: 100%;
+  overflow: hidden;
+  display: block;
   width: 100%;
-  object-fit: fill;
+  background-size: 100% 100%;
   background-position: center;
 }
+

@@ -3,7 +3,7 @@ let popup = document.querySelector('.popup');
 let closeEditButton = popup.querySelector('.popup__close-button');
 let pageWrapper = document.querySelector('.page__wrapper');
 
-let loveButtons = document.querySelectorAll('.image-card__love-button');
+
 
 let form = document.querySelector('.popup__form');
 
@@ -42,3 +42,48 @@ openEditButton.addEventListener('click', openForm);
 closeEditButton.addEventListener('click', closeForm); 
 
 form.addEventListener('submit', handleFormSubmit);
+
+
+
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+  }
+]; 
+
+const cardTemplate = document.querySelector('#card-template').content;
+ 
+let cardsContainer = document.querySelector('.images-container');
+
+function createCard(card) {
+  const cardTemplate = document.querySelector('#card-template').content;
+  const cardElement = cardTemplate.querySelector('.image-card').cloneNode(true);
+  cardElement.querySelector('.image-card__name').textContent = card.name;
+  cardElement.querySelector('.image-card__image').style.backgroundImage = `url(${card.link})`;
+  return cardElement;
+} 
+
+initialCards.forEach((card)=>{
+  cardsContainer.append(createCard(card));
+});
