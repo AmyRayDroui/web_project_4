@@ -1,5 +1,6 @@
 .popup {
   visibility: hidden;
+  opacity: 0;
   position: fixed;
   min-width: 100vw;
   min-height: 100vh;
@@ -9,4 +10,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: visibility 0s, opacity 0.3s linear;
 }

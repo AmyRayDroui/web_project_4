@@ -8,5 +8,9 @@
   background-color: transparent;
   padding-top: 19px;
   border: none;
+  transition: opacity .3s ease-in-out;
+}
 
+.image-card__remove-button:hover {
+  opacity: .6;
 }
