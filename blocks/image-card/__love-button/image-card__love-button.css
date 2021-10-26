@@ -1,5 +1,4 @@
 .image-card__love-button {
-  grid-area: button;
   max-height: 19px;
   min-width: 21px;
   background-image: url(../../../images/icons/heart_icon.svg);

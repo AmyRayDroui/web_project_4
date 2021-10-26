@@ -1,4 +1,5 @@
 .image-card__image {
+  position: relative;
   grid-area: image;
   box-sizing: border-box;
   padding-top: 100%;
