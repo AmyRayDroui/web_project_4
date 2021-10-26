@@ -65,6 +65,7 @@ function createCard(card) {
   //view card popup event
   cardElement.querySelector('.image-card__image').addEventListener('click', () => {
     popupViewCard.querySelector('.popup__image').src = card.link;
+    popupViewCard.querySelector('.popup__image').alt = card.name;
     popupViewCard.querySelector('.popup__card-title').textContent = card.name;
     popupViewCard.classList.toggle('popup_visible');
   })
