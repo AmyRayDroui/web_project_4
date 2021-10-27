@@ -1,29 +1,3 @@
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg"
-  }
-]; 
 
 
 let openEditButton = document.querySelector('.profile__button_type_edit');
@@ -47,12 +21,9 @@ let inputAddLink = popupAddCard.querySelector('.popup__input_type_card-link');
 
 let cardsContainer = document.querySelector('.images-container');
 
-initialCards.forEach((card)=>{
-  cardsContainer.append(createCard(card));
-});
+const cardTemplate = document.querySelector('#card-template').content;
 
 function createCard(card) {
-  const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.image-card').cloneNode(true);
   cardElement.querySelector('.image-card__name').textContent = card.name;
   cardElement.querySelector('.image-card__image').style.backgroundImage = `url(${card.link})`;
@@ -78,28 +49,38 @@ function createCard(card) {
   return cardElement;
 } 
 
+initialCards.forEach((card)=>{
+  cardsContainer.append(createCard(card));
+});
+
+
+
 function openForm(popup) {
-  inputEditName.value = profileName.textContent;
-  inputEditInfo.value = profileInfo.textContent;
-  popup.classList.toggle('popup_visible');
+  popup.classList.add('popup_visible');
 }
 
-function handleEditSubmit(event, popup) {
+function openProfilePopup() { 
+  inputEditName.value = profileName.textContent;
+  inputEditInfo.value = profileInfo.textContent;
+  popupEditProfile.classList.add('popup_visible');
+  } 
+
+function handleEditProfileSubmit(event, popup) {
   event.preventDefault();
   profileName.textContent = inputEditName.value;
   profileInfo.textContent = inputEditInfo.value;
-  popup.classList.toggle('popup_visible');
+  popup.classList.remove('popup_visible');
 }
 
-function handleAddSubmit(event, popup) {
+function handleAddCardSubmit(event, popup) {
   event.preventDefault();
   let card = {name: inputAddName.value,
               link: inputAddLink.value};
   cardsContainer.prepend(createCard(card));
-  popup.classList.toggle('popup_visible');
+  popup.classList.remove('popup_visible');
 }
 
-openEditButton.addEventListener('click',() => openForm(popupEditProfile));
+openEditButton.addEventListener('click',() => openProfilePopup());
 openAddButton.addEventListener('click',() => openForm(popupAddCard));
 
 
@@ -109,8 +90,8 @@ allCloseButtons.forEach(button => button.addEventListener('click', () => {
 }));
 
 //submitting forms events
-submitEditForm.addEventListener('submit', () => handleEditSubmit(event, popupEditProfile));
-submitAddForm.addEventListener('submit', () => handleAddSubmit(event, popupAddCard));
+submitEditForm.addEventListener('submit', () => handleEditProfileSubmit(event, popupEditProfile));
+submitAddForm.addEventListener('submit', () => handleAddCardSubmit(event, popupAddCard));
 
 
 

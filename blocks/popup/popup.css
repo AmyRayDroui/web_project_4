@@ -10,5 +10,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: visibility 0s, opacity 0.3s linear;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
