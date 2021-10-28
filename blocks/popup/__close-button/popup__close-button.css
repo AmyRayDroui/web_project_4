@@ -10,7 +10,6 @@
   background-position: center;
   background-size: cover;
   border: none;
-  cursor: pointer;
   transition: opacity .3s ease-in-out;
 }
 
@@ -25,4 +24,5 @@
 
 .popup__close-button:hover {
   opacity: .6;
+  cursor: pointer;
 }

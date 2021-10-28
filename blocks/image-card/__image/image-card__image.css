@@ -10,3 +10,6 @@
   background-position: center;
 }
 
+.image-card__image:hover {
+  cursor: pointer;
+}

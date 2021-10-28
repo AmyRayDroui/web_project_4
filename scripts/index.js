@@ -1,15 +1,15 @@
 
 
-let openEditButton = document.querySelector('.profile__button_type_edit');
-let openAddButton = document.querySelector('.profile__button_type_add-image');
+const openEditButton = document.querySelector('.profile__button_type_edit');
+const openAddButton = document.querySelector('.profile__button_type_add-image');
 
-let popupEditProfile = document.querySelector('.popup_type_edit-profile');
-let popupAddCard = document.querySelector('.popup_type_add-card');
-let popupViewCard = document.querySelector('.popup_type_card-view');
-let allCloseButtons = document.querySelectorAll('.popup__close-button');
+const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+const popupAddCard = document.querySelector('.popup_type_add-card');
+const popupViewCard = document.querySelector('.popup_type_card-view');
+const allCloseButtons = document.querySelectorAll('.popup__close-button');
 
-let submitEditForm = popupEditProfile.querySelector('.popup__form');
-let submitAddForm = popupAddCard.querySelector('.popup__form');
+const submitEditForm = popupEditProfile.querySelector('.popup__form');
+const submitAddForm = popupAddCard.querySelector('.popup__form');
 
 let profileName = document.querySelector('.profile__name');
 let profileInfo = document.querySelector('.profile__info');
@@ -62,7 +62,7 @@ function openForm(popup) {
 function openProfilePopup() { 
   inputEditName.value = profileName.textContent;
   inputEditInfo.value = profileInfo.textContent;
-  popupEditProfile.classList.add('popup_visible');
+  openForm(popupEditProfile);
   } 
 
 function handleEditProfileSubmit(event, popup) {
@@ -74,7 +74,7 @@ function handleEditProfileSubmit(event, popup) {
 
 function handleAddCardSubmit(event, popup) {
   event.preventDefault();
-  let card = {name: inputAddName.value,
+  const card = {name: inputAddName.value,
               link: inputAddLink.value};
   cardsContainer.prepend(createCard(card));
   popup.classList.remove('popup_visible');
@@ -85,7 +85,7 @@ openAddButton.addEventListener('click',() => openForm(popupAddCard));
 
 
 allCloseButtons.forEach(button => button.addEventListener('click', () => {
-  let allPopups = document.querySelectorAll('.popup');
+  const allPopups = document.querySelectorAll('.popup');
   allPopups.forEach(popup => popup.classList.remove('popup_visible'));
 }));
 

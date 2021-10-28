@@ -13,4 +13,5 @@
 
 .image-card__remove-button:hover {
   opacity: .6;
+  cursor: pointer;
 }
