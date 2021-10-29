@@ -1,5 +1,3 @@
-
-
 const openEditButton = document.querySelector('.profile__button_type_edit');
 const openAddButton = document.querySelector('.profile__button_type_add-image');
 
@@ -11,15 +9,15 @@ const allCloseButtons = document.querySelectorAll('.popup__close-button');
 const submitEditForm = popupEditProfile.querySelector('.popup__form');
 const submitAddForm = popupAddCard.querySelector('.popup__form');
 
-let profileName = document.querySelector('.profile__name');
-let profileInfo = document.querySelector('.profile__info');
+const profileName = document.querySelector('.profile__name');
+const profileInfo = document.querySelector('.profile__info');
 
-let inputEditName = popupEditProfile.querySelector('.popup__input_type_name');
-let inputEditInfo = popupEditProfile.querySelector('.popup__input_type_info'); 
-let inputAddName = popupAddCard.querySelector('.popup__input_type_card-name');
-let inputAddLink = popupAddCard.querySelector('.popup__input_type_card-link'); 
+const inputEditName = popupEditProfile.querySelector('.popup__input_type_name');
+const inputEditInfo = popupEditProfile.querySelector('.popup__input_type_info'); 
+const inputAddName = popupAddCard.querySelector('.popup__input_type_card-name');
+const inputAddLink = popupAddCard.querySelector('.popup__input_type_card-link'); 
 
-let cardsContainer = document.querySelector('.images-container');
+const cardsContainer = document.querySelector('.images-container');
 
 const cardTemplate = document.querySelector('#card-template').content;
 
@@ -41,7 +39,7 @@ function createCard(card) {
     popupViewCard.classList.toggle('popup_visible');
   })
 
-  //delete card event
+  //deconste card event
   cardElement.querySelector('.image-card__remove-button').addEventListener('click', function(evt) {
     evt.target.parentElement.remove();
   })
