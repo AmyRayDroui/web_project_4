@@ -51,10 +51,25 @@ initialCards.forEach((card)=>{
   cardsContainer.append(createCard(card));
 });
 
-
-
+//adding document event listeners for closing forms
 function openForm(popup) {
   popup.classList.add('popup_visible');
+  document.addEventListener("click", handleCloseClick);
+  document.addEventListener("keydown", handleCloseEscape);
+}
+
+function handleCloseClick(evt) {
+  closeForm(evt.target);
+}
+
+function handleCloseEscape(evt) {
+  if (evt.key === "Escape") {
+    closeForm(document.querySelector(".popup_visible"));
+  }
+}
+
+function closeForm(popup) {
+  popup.classList.remove('popup_visible');
 }
 
 function openProfilePopup() { 
@@ -67,7 +82,7 @@ function handleEditProfileSubmit(event, popup) {
   event.preventDefault();
   profileName.textContent = inputEditName.value;
   profileInfo.textContent = inputEditInfo.value;
-  popup.classList.remove('popup_visible');
+  closeForm(popup);
 }
 
 function handleAddCardSubmit(event, popup) {
@@ -75,7 +90,7 @@ function handleAddCardSubmit(event, popup) {
   const card = {name: inputAddName.value,
               link: inputAddLink.value};
   cardsContainer.prepend(createCard(card));
-  popup.classList.remove('popup_visible');
+  closeForm(popup);
 }
 
 openEditButton.addEventListener('click',() => openProfilePopup());
@@ -84,8 +99,10 @@ openAddButton.addEventListener('click',() => openForm(popupAddCard));
 
 allCloseButtons.forEach(button => button.addEventListener('click', () => {
   const allPopups = document.querySelectorAll('.popup');
-  allPopups.forEach(popup => popup.classList.remove('popup_visible'));
+  allPopups.forEach(popup => closeForm(popup));
 }));
+
+
 
 //submitting forms events
 submitEditForm.addEventListener('submit', () => handleEditProfileSubmit(event, popupEditProfile));
