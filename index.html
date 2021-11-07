@@ -32,9 +32,11 @@
     <div class="popup__container">
       <button type="button" class="popup__close-button" aria-label="Close popup"></button>
       <h2 class="popup__title">Edit profile</h2>
-      <form class="popup__form" name="edit-profile">
-        <input type="text" name="name" class="popup__input popup__input_type_name" required>
-        <input type="text" name="info" class="popup__input popup__input_type_info" required>
+      <form class="popup__form" name="edit-profile" novalidate>
+        <input type="text" name="name" class="popup__input popup__input_type_name" id="name-input" required minlength="2" maxlength="40">
+        <span class="popup__error name-input-error"></span>
+        <input type="text" name="info" class="popup__input popup__input_type_info" id="info-input" required minlength="2" maxlength="200">
+        <span class="popup__error info-input-error"></span>
         <button type="submit" class="popup__save-button" aria-label="Submit">Save</button>
       </form>
     </div> 
@@ -43,9 +45,11 @@
     <div class="popup__container">
       <button type="button" class="popup__close-button" aria-label="Close popup"></button>
       <h2 class="popup__title">New place</h2>
-      <form class="popup__form" name="edit-profile">
-        <input type="text" name="card-name" class="popup__input popup__input_type_card-name" placeholder="Card name" required>
-        <input type="text" name="card-link" class="popup__input popup__input_type_card-link" placeholder="Card link" required>
+      <form class="popup__form" name="edit-profile" novalidate>
+        <input type="text" name="card-name" class="popup__input popup__input_type_card-name" id="card-name-input" placeholder="Card name" required maxlength="30">
+        <span class="popup__error card-name-input-error"></span>
+        <input type="url" name="card-link" class="popup__input popup__input_type_card-link" id="card-link-input" placeholder="Card link" required>
+        <span class="popup__error card-link-input-error"></span>
         <button type="submit" class="popup__save-button" aria-label="Submit">Create</button>
       </form>
     </div> 
@@ -68,6 +72,7 @@
     </div>
   </template>
   <script src="./scripts/initialCards.js"></script>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

@@ -90,7 +90,3 @@ allCloseButtons.forEach(button => button.addEventListener('click', () => {
 //submitting forms events
 submitEditForm.addEventListener('submit', () => handleEditProfileSubmit(event, popupEditProfile));
 submitAddForm.addEventListener('submit', () => handleAddCardSubmit(event, popupAddCard));
-
-
-
-
