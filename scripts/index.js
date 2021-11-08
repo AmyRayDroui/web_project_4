@@ -65,7 +65,9 @@ function openForm(popup) {
 }
 
 function handleCloseClick(evt) {
-  closeForm(evt.target);
+  if (evt.target.classList.contains("popup_visible")) {
+    closeForm(document.querySelector(".popup_visible"));
+  }
 }
 
 function handleCloseEscape(evt) {
@@ -75,8 +77,8 @@ function handleCloseEscape(evt) {
 }
 
 function closeForm(popup) {
-  document.addEventListener("click", handleCloseClick);
-  document.addEventListener("keydown", handleCloseEscape);
+  document.removeEventListener("click", handleCloseClick);
+  document.removeEventListener("keydown", handleCloseEscape);
   popup.classList.remove('popup_visible');
 }
 
@@ -95,10 +97,13 @@ function handleEditProfileSubmit(event, popup) {
 
 function handleAddCardSubmit(event, popup) {
   event.preventDefault();
+  const saveButton = popup.querySelector('.popup__save-button');
   const card = {name: inputAddName.value,
               link: inputAddLink.value};
   cardsContainer.prepend(createCard(card));
   closeForm(popup);
+  saveButton.disabled = true;
+  saveButton.classList.add('popup__save-button_disabled');
   inputAddName.value = '';
   inputAddLink.value = '';
 }
