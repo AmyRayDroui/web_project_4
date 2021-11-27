@@ -99,8 +99,8 @@ function handleCloseEscape(evt) {
 }
 
 function closeForm(popup) {
-  document.addEventListener("click", handleCloseClick);
-  document.addEventListener("keydown", handleCloseEscape);
+  document.removeEventListener("click", handleCloseClick);
+  document.removeEventListener("keydown", handleCloseEscape);
   popup.classList.remove('popup_visible');
 }
 
@@ -119,11 +119,14 @@ function handleEditProfileSubmit(event, popup) {
 
 function handleAddCardSubmit(event, popup) {
   event.preventDefault();
+  const saveButton = popup.querySelector('.popup__save-button');
   const data = {name: inputAddName.value,
               link: inputAddLink.value};
   const card = new Card (data, cardTemplate)
   cardsContainer.prepend(card.createCard());
   closeForm(popup);
+  saveButton.disabled = true;
+  saveButton.classList.add('popup__save-button_disabled');
   inputAddName.value = '';
   inputAddLink.value = '';
 }
