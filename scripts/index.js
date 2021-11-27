@@ -120,7 +120,7 @@ function handleEditProfileSubmit(event, popup) {
 function handleAddCardSubmit(event, popup) {
   event.preventDefault();
   const saveButton = popup.querySelector('.popup__save-button');
-  const data = {name: inputAddName.value,
+  const card = {name: inputAddName.value,
               link: inputAddLink.value};
   const card = new Card (data, cardTemplate)
   cardsContainer.prepend(card.createCard());
