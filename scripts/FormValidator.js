@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(configObject, formElement) {
     this._settings = configObject;
     this._formElement = formElement;
@@ -62,20 +62,5 @@ class FormValidator {
     errorElement.textContent = "";
   };
 }
-
-configObject = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save-button",
-  inactiveButtonClass: "popup__save-button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible"
-};
-
-const formList = Array.from(document.querySelectorAll(configObject.formSelector));
-formList.forEach((formElement) => {
-  form = new FormValidator(configObject, formElement);
-  form.enableValidation();
-});
 
 
