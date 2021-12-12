@@ -30,10 +30,4 @@ function closeForm(popup) {
   popup.classList.remove('popup_visible');
 }
 
-function openProfilePopup() { 
-  inputEditName.value = profileName.textContent;
-  inputEditInfo.value = profileInfo.textContent;
-  openForm(popupEditProfile);
-} 
-
-export {openForm, closeForm, openProfilePopup};
+export {openForm, closeForm};

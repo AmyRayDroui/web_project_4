@@ -24,18 +24,18 @@ export default class Card {
     const cardImage = this._cardElement.querySelector('.image-card__image');
     const cardRemove = this._cardElement.querySelector('.image-card__remove-button');
 
-    this._likeHandler(cardLike);
+    cardLike.addEventListener('click', this._handleLike);
 
-    this._popupHandler(cardImage);
-
-    this._removeHandler(cardRemove);
+    this._handlepopup(cardImage);
+    
+    cardRemove.addEventListener('click', () => this._handleremove());
   }
 
-  _likeHandler(cardLike) {
-    cardLike.addEventListener('click', (evt) => evt.target.classList.toggle('image-card__love-button_active'));
+  _handleLike(evt) {
+    evt.target.classList.toggle('image-card__love-button_active');
   }
 
-  _popupHandler(cardImage) {
+  _handlepopup(cardImage) {
     const popupViewCard = document.querySelector('.popup_type_card-view');
     const popupImage = popupViewCard.querySelector('.popup__image');
     const popupTitle = popupViewCard.querySelector('.popup__card-title');
@@ -48,8 +48,9 @@ export default class Card {
     })
   }
 
-  _removeHandler(cardRemove) {
-    cardRemove.addEventListener('click', () => this._cardElement.remove());
+  _handleremove() {
+    this._cardElement.remove();
+    this._cardElement = null;
   }
 }
 

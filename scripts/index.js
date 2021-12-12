@@ -2,7 +2,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import initialCards from './initialCards.js'
-import { openForm, closeForm, openProfilePopup} from './utils.js';
+import { openForm, closeForm} from './utils.js';
 
 //consts
 const openEditButton = document.querySelector('.profile__button_type_edit');
@@ -35,6 +35,13 @@ initialCards.forEach((data)=>{
   const card = new Card(data, cardTemplate);
   cardsContainer.append(card.createCard());
 });
+
+
+function openProfilePopup() { 
+  inputEditName.value = profileName.textContent;
+  inputEditInfo.value = profileInfo.textContent;
+  openForm(popupEditProfile);
+} 
 
 //open buttons events
 openEditButton.addEventListener('click',() => openProfilePopup());
