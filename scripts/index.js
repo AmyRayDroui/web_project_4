@@ -3,8 +3,10 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import initialCards from './initialCards.js'
 import { openForm, closeForm} from './utils.js';
+import PopupWithImage from './PopupWithImage.js';
 
-//consts
+
+//constants
 const openEditButton = document.querySelector('.profile__button_type_edit');
 const openAddButton = document.querySelector('.profile__button_type_add-image');
 const profileName = document.querySelector('.profile__name');

@@ -1,10 +1,11 @@
 import {openForm} from './utils.js';
 
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCard) {
     this._name = data.name;
     this._link = data.link;
     this._cardElement = cardSelector.querySelector('.image-card').cloneNode(true);
+    this._handleCardClick = handleCard;
   }
 
   createCard() {
