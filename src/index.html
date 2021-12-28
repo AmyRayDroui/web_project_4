@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Around The U.S</title>
 </head>
 <body class="page">
   <div class="page__wrapper">
     <header class="header">
-      <img src="./images/logos/page_logo.svg" alt="site logo" class="header__logo">
+      <img id="page-logo" src="<%= require('./images/logos/page_logo.svg')%>" alt="site logo" class="header__logo">
     </header>
     <main class="content">
       <section class="profile">
-        <img src="./images/profile-image/Jacques.jpg" alt="Jacques's photo" class="profile__image">
+        <img id="profile-image" src="<%= require('./images/profile-image/Jacques.jpg')%>" alt="Jacques's photo" class="profile__image">
         <div class="profile__container profile__overflow-element">
           <h1 class="profile__name profile__overflow-element">Jacques Cousteau</h1>
           <button type="button" class="profile__button profile__button_type_edit" aria-label="Edit profile"></button>
@@ -71,6 +70,6 @@
       </div>
     </div>
   </template>
-  <script type="module" src="./scripts/index.js"></script>
+  
 </body>
 </html>
