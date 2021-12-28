@@ -26,30 +26,21 @@ export default class Card {
     const cardRemove = this._cardElement.querySelector('.image-card__remove-button');
 
     cardLike.addEventListener('click', this._handleLike);
-
-    this._handlepopup(cardImage);
     
-    cardRemove.addEventListener('click', () => this._handleremove());
+    cardImage.addEventListener('click', this._handlePopup);
+    
+    cardRemove.addEventListener('click', this._handleremove);
   }
 
   _handleLike(evt) {
     evt.target.classList.toggle('image-card__love-button_active');
   }
 
-  _handlepopup(cardImage) {
-    const popupViewCard = document.querySelector('.popup_type_card-view');
-    const popupImage = popupViewCard.querySelector('.popup__image');
-    const popupTitle = popupViewCard.querySelector('.popup__card-title');
-
-    cardImage.addEventListener('click', () => {
-      popupImage.src = this._link;
-      popupImage.alt = this._name;
-      popupTitle.textContent = this._name;
-      openForm(popupViewCard);
-    })
+  _handlePopup = () => {
+    this._handleCardClick(this._link,this._name);
   }
 
-  _handleremove() {
+  _handleremove = () => {
     this._cardElement.remove();
     this._cardElement = null;
   }
