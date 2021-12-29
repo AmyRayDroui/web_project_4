@@ -1,5 +1,3 @@
-import {openForm} from './utils.js';
-
 export default class Card {
   constructor(data, cardSelector, handleCard) {
     this._name = data.name;
@@ -29,7 +27,7 @@ export default class Card {
     
     cardImage.addEventListener('click', this._handlePopup);
     
-    cardRemove.addEventListener('click', this._handleremove);
+    cardRemove.addEventListener('click', this._handleRemove);
   }
 
   _handleLike(evt) {
@@ -37,10 +35,10 @@ export default class Card {
   }
 
   _handlePopup = () => {
-    this._handleCardClick(this._link,this._name);
+    this._handleCardClick(this._link, this._name);
   }
 
-  _handleremove = () => {
+  _handleRemove = () => {
     this._cardElement.remove();
     this._cardElement = null;
   }

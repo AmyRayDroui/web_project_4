@@ -6,7 +6,6 @@ import "./index.css";
 import Card from '../scripts/Card.js';
 import FormValidator from '../scripts/FormValidator.js';
 import initialCards from '../scripts/initialCards.js'
-//import { openForm, closeForm} from './scripts/utils.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
 import PopupWithForm from '../scripts/PopupWithForm.js';
 import UserInfo from '../scripts/UserInfo.js';
@@ -46,12 +45,10 @@ formList.forEach((formElement) => {
 
 const userData = new UserInfo(profileName, profileInfo);
 
-const popupEditProfile = new PopupWithForm(profileInfoHandler, popupEditProfileSelector);
-const popupAddCard = new PopupWithForm(addCardHandler, popupAddCardSelector);
+const popupEditProfile = new PopupWithForm(handleProfileFormSubmit, popupEditProfileSelector);
+const popupAddCard = new PopupWithForm(handleAddCardFormSubmit, popupAddCardSelector);
 const popupImage = new PopupWithImage(popupImageViewSelector);
 const openImage = popupImage.open;
-
-
 
 
 popupAddCard.setEventListeners();
@@ -67,31 +64,25 @@ openAddButton.addEventListener('click', () => {
   popupAddCard.open();
 });
 
-const initialRender = new Section({
+const cardList = new Section({
   items: initialCards,
   renderer: (cardData) => {
     const card = new Card(cardData, cardTemplate, openImage);
-    initialRender.addItem(card.createCard());
+    cardList.addItem(card.createCard());
   }},
   cardsContainerSelector
 )
-initialRender.renderer();
+cardList.renderer();
 
-function profileInfoHandler(submissionData){
+function handleProfileFormSubmit(submissionData){
   userData.setUserInfo(submissionData.name, submissionData.info);
   profileName.textContent = submissionData.name;
   profileInfo.textContent = submissionData.info;
   popupEditProfile.close();
 }
 
-function addCardHandler(submission){
-  const card = new Card(submission, cardTemplate, openImage);
-  const renderNewCard = new Section({
-    items: [card],
-    renderer: () => {
-      renderNewCard.addItem(card.createCard());
-    }
-  },cardsContainerSelector);
-  renderNewCard.renderer();
+function handleAddCardFormSubmit(cardData){
+  const card = new Card(cardData, cardTemplate, openImage);
+  cardList.addItem(card.createCard());
   popupAddCard.close();
 }

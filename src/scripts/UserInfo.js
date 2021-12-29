@@ -5,8 +5,10 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    const userInfo = {name: this._userNameElement.textContent,
-    job: this._userJobElement.textContent};
+    const userInfo = {
+      name: this._userNameElement.textContent,
+      job: this._userJobElement.textContent
+    };
     return userInfo;
   }
 
