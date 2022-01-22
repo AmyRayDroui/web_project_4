@@ -12,7 +12,10 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img id="profile-image" src="<%= require('./images/profile-image/Jacques.jpg')%>" alt="Jacques's photo" class="profile__image">
+        <div class="profile__image-container">
+          <img id="profile-image" src="<%= require('./images/profile-image/Jacques.jpg')%>" alt="Jacques's photo" class="profile__image">
+          <div class="profile__image-overlay"></div>
+        </div>
         <div class="profile__container profile__overflow-element">
           <h1 class="profile__name profile__overflow-element">Jacques Cousteau</h1>
           <button type="button" class="profile__button profile__button_type_edit" aria-label="Edit profile"></button>
@@ -40,6 +43,17 @@
       </form>
     </div> 
   </div>
+  <div class="popup popup_type_edit-profile-image">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button" aria-label="Close popup"></button>
+      <h2 class="popup__title">Change profile picture</h2>
+      <form class="popup__form" name="edit-profile" novalidate>
+        <input type="url" name="link" class="popup__input popup__input_type_profile-img-link" id="profile-img-link-input" required>
+        <span class="popup__error card-link-input-error"></span>
+        <button type="submit" class="popup__save-button" aria-label="Submit">Save</button>
+      </form>
+    </div> 
+  </div>
   <div class="popup popup_type_add-card">
     <div class="popup__container">
       <button type="button" class="popup__close-button" aria-label="Close popup"></button>
@@ -58,6 +72,13 @@
       <img src="#" alt="#" class="popup__image">
       <button type="button" class="popup__close-button" aria-label="Close popup"></button>
       <p class="popup__card-title"></p>
+    </div> 
+  </div>
+  <div class="popup popup_type_remove-card">
+    <div class="popup__container popup__remove-container">
+      <button type="button" class="popup__close-button" aria-label="Close popup"></button>
+      <h2 class="popup__title popup__title_type_remove-card">Are you sure?</h2>
+      <button type="submit" class="popup__save-button popup__save-button_type_remove-card" aria-label="Submit">Yes</button>
     </div> 
   </div>
   <template id="card-template">

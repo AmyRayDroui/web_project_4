@@ -51,6 +51,10 @@ const api = new Api({
   }
 }); 
 
+//document.querySelector('.popup_type_remove-card').classList.add('popup_visible');
+//document.querySelector('.popup_type_edit-profile-image').classList.add('popup_visible');
+
+
 const userData = new UserInfo(profileName, profileInfo);
 
 const popupEditProfile = new PopupWithForm(handleProfileFormSubmit, popupEditProfileSelector);
