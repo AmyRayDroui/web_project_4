@@ -14,10 +14,13 @@ import Section from '../scripts/Section.js';
 
 //constants
 const openEditButton = document.querySelector('.profile__button_type_edit');
+const openEditImgButton = document.querySelector('.profile__button_type_edit-img');
 const openAddButton = document.querySelector('.profile__button_type_add-image');
 const profileName = document.querySelector('.profile__name');
 const profileInfo = document.querySelector('.profile__info');
+const profilePicture = document.querySelector('.profile__image');
 const popupEditProfileSelector = '.popup_type_edit-profile';
+const popupEditProfileImgSelector = '.popup_type_edit-profile-image';
 const popupAddCardSelector = '.popup_type_add-card';
 const popupImageViewSelector = '.popup_type_card-view';
 const cardsContainerSelector = '.images-container';
@@ -25,6 +28,7 @@ const cardTemplate = document.querySelector('#card-template').content;
 
 const inputEditName = document.querySelector(popupEditProfileSelector).querySelector('.popup__input_type_name');
 const inputEditInfo = document.querySelector(popupEditProfileSelector).querySelector('.popup__input_type_info');
+const inputEditImg = document.querySelector(popupEditProfileImgSelector).querySelector('.popup__input_type_profile-img-link');
 //form validator config
 const configObject = {
   formSelector: ".popup__form",
@@ -55,9 +59,10 @@ const api = new Api({
 //document.querySelector('.popup_type_edit-profile-image').classList.add('popup_visible');
 
 
-const userData = new UserInfo(profileName, profileInfo);
+const userData = new UserInfo(profileName, profileInfo, profilePicture);
 
 const popupEditProfile = new PopupWithForm(handleProfileFormSubmit, popupEditProfileSelector);
+const popupEditProfileImg = new PopupWithForm(handleProfileImgForSubmit, popupEditProfileImgSelector);
 const popupAddCard = new PopupWithForm(handleAddCardFormSubmit, popupAddCardSelector);
 const popupImage = new PopupWithImage(popupImageViewSelector);
 const openImage = popupImage.open;
@@ -72,9 +77,13 @@ openEditButton.addEventListener('click', () => {
   inputEditName.value = userElement.name;
   inputEditInfo.value = userElement.job;
 });
+openEditImgButton.addEventListener('click', () => {
+  popupEditProfileImg.open();
+});
 openAddButton.addEventListener('click', () => {
   popupAddCard.open();
 });
+
 
 const cardList = new Section({
   items: initialCards,
@@ -92,6 +101,11 @@ function handleProfileFormSubmit(submissionData){
   profileInfo.textContent = submissionData.info;
   popupEditProfile.close();
 }
+
+function handleProfileImgForSubmit(imgUrl){
+
+}
+
 
 function handleAddCardFormSubmit(cardData){
   const card = new Card(cardData, cardTemplate, openImage);

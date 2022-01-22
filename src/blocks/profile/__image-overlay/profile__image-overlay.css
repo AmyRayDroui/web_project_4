@@ -9,6 +9,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 26px;
+  border: none;
   opacity: 0;
   transition: opacity .3s ease-in-out;
 }
