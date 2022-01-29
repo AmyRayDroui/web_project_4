@@ -2,6 +2,7 @@ export default class Card {
   constructor(data, cardSelector, handleCard) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes;
     this._cardElement = cardSelector.querySelector('.image-card').cloneNode(true);
     this._handleCardClick = handleCard;
   }
@@ -9,9 +10,11 @@ export default class Card {
   createCard() {
     const cardName = this._cardElement.querySelector('.image-card__name');
     const cardImage = this._cardElement.querySelector('.image-card__image');
+    const cardLikes = this._cardElement.querySelector('.image-card__love-count');
   
     cardName.textContent = this._name;
     cardImage.style.backgroundImage = `url(${this._link})`;
+    cardLikes.textContent = this._likes.length;
   
     this._setEventListeners();
 

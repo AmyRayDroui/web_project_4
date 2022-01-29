@@ -13,14 +13,14 @@
     <main class="content">
       <section class="profile">
         <div class="profile__image-container">
-          <div id="profile-image" class="profile__image"></div>
+          <img id="profile-image" src="" alt="No avatar" class="profile__image">
           <button class="profile__image-overlay profile__button_type_edit-img"></button>
         </div>
         <div class="profile__container profile__overflow-element">
-          <h1 class="profile__name profile__overflow-element">Jacques Cousteau</h1>
+          <h1 class="profile__name profile__overflow-element"></h1>
           <button type="button" class="profile__button profile__button_type_edit" aria-label="Edit profile"></button>
         </div>
-        <p class="profile__info profile__overflow-element">Explorer</p>
+        <p class="profile__info profile__overflow-element"></p>
         <button type="button" class="profile__button profile__button_type_add-image" aria-label="Add image"></button>
       </section>
       <section class="images-container">
@@ -47,9 +47,9 @@
     <div class="popup__container">
       <button type="button" class="popup__close-button" aria-label="Close popup"></button>
       <h2 class="popup__title">Change profile picture</h2>
-      <form class="popup__form" name="edit-profile" novalidate>
+      <form class="popup__form" name="edit-profile-img" novalidate>
         <input type="url" name="link" class="popup__input popup__input_type_profile-img-link" id="profile-img-link-input" required>
-        <span class="popup__error card-link-input-error"></span>
+        <span class="popup__error profile-img-link-input-error"></span>
         <button type="submit" class="popup__save-button" aria-label="Submit">Save</button>
       </form>
     </div> 
@@ -58,7 +58,7 @@
     <div class="popup__container">
       <button type="button" class="popup__close-button" aria-label="Close popup"></button>
       <h2 class="popup__title">New place</h2>
-      <form class="popup__form" name="edit-profile" novalidate>
+      <form class="popup__form" name="add-card" novalidate>
         <input type="text" name="name" class="popup__input popup__input_type_card-name" id="card-name-input" placeholder="Card name" required maxlength="30">
         <span class="popup__error card-name-input-error"></span>
         <input type="url" name="link" class="popup__input popup__input_type_card-link" id="card-link-input" placeholder="Card link" required>
