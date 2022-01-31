@@ -1,10 +1,15 @@
 export default class Card {
-  constructor(data, cardSelector, handleCard) {
+  constructor(data, cardSelector, handleCardClick, userId, handleDeletePopup) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
+    this._owner = data.owner;
+    this._ownerId = this._owner._id;
+    this._cardId = data._id;
+    this._userId = userId;
     this._cardElement = cardSelector.querySelector('.image-card').cloneNode(true);
-    this._handleCardClick = handleCard;
+    this._handleDeletePopup = handleDeletePopup;
+    this._handleCardClick = handleCardClick;
   }
 
   createCard() {
@@ -30,7 +35,12 @@ export default class Card {
     
     cardImage.addEventListener('click', this._handlePopup);
     
-    cardRemove.addEventListener('click', this._handleRemove);
+    if(this._ownerId === this._userId) {
+      cardRemove.addEventListener('click', this._handleRemove);
+    } else {
+      cardRemove.remove();
+    }
+    
   }
 
   _handleLike(evt) {
@@ -42,8 +52,7 @@ export default class Card {
   }
 
   _handleRemove = () => {
-    this._cardElement.remove();
-    this._cardElement = null;
+    this._handleDeletePopup(this._cardId, this._cardElement);
   }
 }
 

@@ -7,6 +7,7 @@ import Card from '../scripts/Card.js';
 import FormValidator from '../scripts/FormValidator.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
 import PopupWithForm from '../scripts/PopupWithForm.js';
+import PopupWithVerification from "../scripts/PopupWithVerification";
 import UserInfo from '../scripts/UserInfo.js';
 import Section from '../scripts/Section.js';
 
@@ -22,6 +23,7 @@ const popupEditProfileSelector = '.popup_type_edit-profile';
 const popupEditProfileImgSelector = '.popup_type_edit-profile-image';
 const popupAddCardSelector = '.popup_type_add-card';
 const popupImageViewSelector = '.popup_type_card-view';
+const popupDeleteVerification = '.popup_type_remove-card';
 const cardsContainerSelector = '.images-container';
 const cardTemplate = document.querySelector('#card-template').content;
 
@@ -33,6 +35,7 @@ const userData = new UserInfo(profileName, profileInfo);
 const popupEditProfile = new PopupWithForm(handleProfileFormSubmit, popupEditProfileSelector);
 const popupEditProfileImg = new PopupWithForm(handleProfileImgForSubmit, popupEditProfileImgSelector);
 const popupAddCard = new PopupWithForm(handleAddCardFormSubmit, popupAddCardSelector);
+const popupDeleteCard = new PopupWithVerification(handleDeleteCard, popupDeleteVerification, '', '');
 const popupImage = new PopupWithImage(popupImageViewSelector);
 const openImage = popupImage.open;
 
@@ -65,12 +68,13 @@ const api = new Api({
 
 const cardList = new Section({
   renderer: (cardData) => {
-    const card = new Card(cardData, cardTemplate, openImage);
+    const card = new Card(cardData, cardTemplate, openImage, userId, handleDeletePopup);
     cardList.addItem(card.createCard());
   }},
   cardsContainerSelector
 )
 
+let userId = '';
 
 api.getUserInfo()
 .then((result) => {
@@ -79,6 +83,7 @@ api.getUserInfo()
   profileInfo.textContent = result.about;
   profilePicture.src = result.avatar;
   profilePicture.alt = `${result.name}'s avatar`;
+  userId = result._id;
 })
 .catch((error) => {
   console.log(error);
@@ -138,11 +143,32 @@ function handleProfileImgForSubmit(imgUrl){
 function handleAddCardFormSubmit(cardData){
   api.addNewCard(cardData)
   .then((result) => {
-    const card = new Card(result, cardTemplate, openImage);
+    const card = new Card(result, cardTemplate, openImage, userId, handleDeletePopup);
     cardList.addItem(card.createCard());
   })
   .catch((error) => {
     console.log(error);
   })
   popupAddCard.close();
+}
+
+function handleDeletePopup(cardId, cardElement) {
+  popupDeleteCard.open();
+  popupDeleteCard.setInfo(cardId, cardElement);
+}
+
+
+function handleDeleteCard(cardId, cardElement) {
+  api.removeCard(cardId)
+  .then((result) => {
+    console.log(result);
+    cardElement.remove();
+    cardElement = null;
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  .finally(() => {
+    popupDeleteCard.close();
+  })
 }
