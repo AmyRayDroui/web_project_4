@@ -93,7 +93,6 @@ api.getUserInfo()
 api.getInitialCards()
 .then((result) => {
   cardList.renderer(result);
-  console.log(result);
 })
 .catch((error) => {
   console.log(error);
