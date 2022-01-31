@@ -33,7 +33,7 @@ const inputEditImg = document.querySelector(popupEditProfileImgSelector).querySe
 const userData = new UserInfo(profileName, profileInfo);
 
 const popupEditProfile = new PopupWithForm(handleProfileFormSubmit, popupEditProfileSelector);
-const popupEditProfileImg = new PopupWithForm(handleProfileImgForSubmit, popupEditProfileImgSelector);
+const popupEditProfileImg = new PopupWithForm(handleProfileImgFormSubmit, popupEditProfileImgSelector);
 const popupAddCard = new PopupWithForm(handleAddCardFormSubmit, popupAddCardSelector);
 const popupDeleteCard = new PopupWithVerification(handleDeleteCard, popupDeleteVerification, '', '');
 const popupImage = new PopupWithImage(popupImageViewSelector);
@@ -68,7 +68,7 @@ const api = new Api({
 
 const cardList = new Section({
   renderer: (cardData) => {
-    const card = new Card(cardData, cardTemplate, openImage, userId, handleDeletePopup);
+    const card = new Card(cardData, cardTemplate, openImage, userId, handleDeletePopup, handleLikeBtn);
     cardList.addItem(card.createCard());
   }},
   cardsContainerSelector
@@ -93,6 +93,7 @@ api.getUserInfo()
 api.getInitialCards()
 .then((result) => {
   cardList.renderer(result);
+  console.log(result);
 })
 .catch((error) => {
   console.log(error);
@@ -121,7 +122,9 @@ openAddButton.addEventListener('click', () => {
 
 
 function handleProfileFormSubmit(submissionData){
-  userData.setUserInfo(submissionData.name, submissionData.info);
+  const popupElement = document.querySelector(popupEditProfileSelector);
+  const popupButton = popupElement.querySelector('.popup__save-button');
+  popupButton.textContent = "Saving...";
   api.setUserInfo(submissionData)
   .then((result) => { 
     userData.setUserInfo(result.name, result.about);
@@ -131,37 +134,54 @@ function handleProfileFormSubmit(submissionData){
   .catch((error) => {
     console.log(error);
   });
+  popupButton.textContent = "Save";
   popupEditProfile.close();
 }
 
-function handleProfileImgForSubmit(imgUrl){
-  profilePicture.src = imgUrl.link;
+function handleProfileImgFormSubmit(submissionData){
+  const popupElement = document.querySelector(popupEditProfileImgSelector);
+  const popupButton = popupElement.querySelector('.popup__save-button');
+  popupButton.textContent = "Saving...";
+  api.setUserAvatar(submissionData)
+  .then((result) => {
+    profilePicture.src = result.avatar;
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+  popupButton.textContent = "Save";
   popupEditProfileImg.close();
 }
 
 
 function handleAddCardFormSubmit(cardData){
+  const popupElement = document.querySelector(popupAddCardSelector);
+  const popupButton = popupElement.querySelector('.popup__save-button');
+  popupButton.textContent = "Creating...";
   api.addNewCard(cardData)
   .then((result) => {
-    const card = new Card(result, cardTemplate, openImage, userId, handleDeletePopup);
+    const card = new Card(result, cardTemplate, openImage, userId, handleDeletePopup, handleLikeBtn);
     cardList.addItem(card.createCard());
   })
   .catch((error) => {
     console.log(error);
   })
+  popupButton.textContent = "Create";
   popupAddCard.close();
 }
 
 function handleDeletePopup(cardId, cardElement) {
-  popupDeleteCard.open();
   popupDeleteCard.setInfo(cardId, cardElement);
+  popupDeleteCard.open();
 }
 
 
 function handleDeleteCard(cardId, cardElement) {
+  const popupElement = document.querySelector(popupDeleteVerification);
+  const popupButton = popupElement.querySelector('.popup__save-button');
+  popupButton.textContent = "Deleting...";
   api.removeCard(cardId)
   .then((result) => {
-    console.log(result);
     cardElement.remove();
     cardElement = null;
   })
@@ -169,6 +189,33 @@ function handleDeleteCard(cardId, cardElement) {
     console.log(error);
   })
   .finally(() => {
+    popupButton.textContent = "Yes";
     popupDeleteCard.close();
   })
+}
+
+function handleLikeBtn(cardId, cardElement, likes) {
+  let likesArr = likes;
+  const likeButton = cardElement.querySelector('.image-card__love-button');
+  const likeCounter = cardElement.querySelector('.image-card__love-count');
+  if(likeButton.classList.contains('image-card__love-button_active')) {
+    api.toggleLike(cardId, false)
+    .then((result) => {
+      likeCounter.textContent = result.likes.length;
+      likesArr = result.likes;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  } else {
+    api.toggleLike(cardId, true)
+    .then((result) => {
+      likeCounter.textContent = result.likes.length;
+      likesArr = result.likes;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+  return likesArr;
 }

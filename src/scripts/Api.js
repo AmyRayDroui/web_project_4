@@ -31,6 +31,21 @@ export default class Api {
     })
   }
 
+  setUserAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.link
+      })
+    }).then(res => {
+      if(res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    })
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
@@ -61,6 +76,18 @@ export default class Api {
   removeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
+      headers: this._headers
+    }).then(res => {
+      if(res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    })
+  }
+
+  toggleLike(cardId, addLike) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: addLike ? 'PUT' : 'DELETE',
       headers: this._headers
     }).then(res => {
       if(res.ok) {

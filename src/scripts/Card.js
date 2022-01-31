@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, cardSelector, handleCardClick, userId, handleDeletePopup) {
+  constructor(data, cardSelector, handleCardClick, userId, handleDeletePopup, handleLikeButton) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -10,6 +10,7 @@ export default class Card {
     this._cardElement = cardSelector.querySelector('.image-card').cloneNode(true);
     this._handleDeletePopup = handleDeletePopup;
     this._handleCardClick = handleCardClick;
+    this._handleLikeButton = handleLikeButton;
   }
 
   createCard() {
@@ -31,6 +32,12 @@ export default class Card {
     const cardImage = this._cardElement.querySelector('.image-card__image');
     const cardRemove = this._cardElement.querySelector('.image-card__remove-button');
 
+    this._likes.forEach(user => {
+      if(this._userId === user._id) {
+        cardLike.classList.add('image-card__love-button_active');
+      }
+    });
+
     cardLike.addEventListener('click', this._handleLike);
     
     cardImage.addEventListener('click', this._handlePopup);
@@ -43,7 +50,8 @@ export default class Card {
     
   }
 
-  _handleLike(evt) {
+  _handleLike = (evt) => {
+    this._likes = this._handleLikeButton(this._cardId, this._cardElement, this._likes);
     evt.target.classList.toggle('image-card__love-button_active');
   }
 
