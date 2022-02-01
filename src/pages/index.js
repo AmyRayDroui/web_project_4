@@ -30,7 +30,7 @@ const cardTemplate = document.querySelector('#card-template').content;
 const inputEditName = document.querySelector(popupEditProfileSelector).querySelector('.popup__input_type_name');
 const inputEditInfo = document.querySelector(popupEditProfileSelector).querySelector('.popup__input_type_info');
 const inputEditImg = document.querySelector(popupEditProfileImgSelector).querySelector('.popup__input_type_profile-img-link');
-const userData = new UserInfo(profileName, profileInfo);
+const userData = new UserInfo(profileName, profileInfo, profilePicture);
 
 const popupEditProfile = new PopupWithForm(handleProfileFormSubmit, popupEditProfileSelector);
 const popupEditProfileImg = new PopupWithForm(handleProfileImgFormSubmit, popupEditProfileImgSelector);
@@ -78,11 +78,7 @@ let userId = '';
 
 api.getUserInfo()
 .then((result) => {
-  userData.setUserInfo(result.name, result.about);
-  profileName.textContent = result.name;
-  profileInfo.textContent = result.about;
-  profilePicture.src = result.avatar;
-  profilePicture.alt = `${result.name}'s avatar`;
+  userData.setUserInfo(result.name, result.about, result.avatar);
   userId = result._id;
 })
 .catch((error) => {
@@ -107,7 +103,7 @@ openEditButton.addEventListener('click', () => {
   popupEditProfile.open();
   const userElement = userData.getUserInfo();
   inputEditName.value = userElement.name;
-  inputEditInfo.value = userElement.job;
+  inputEditInfo.value = userElement.about;
 });
 openEditImgButton.addEventListener('click', () => {
   const imgUrl = profilePicture.src;
@@ -127,9 +123,7 @@ function handleProfileFormSubmit(submissionData){
   popupButton.textContent = "Saving...";
   api.setUserInfo(submissionData)
   .then((result) => { 
-    userData.setUserInfo(result.name, result.about);
-    profileName.textContent = result.name;
-    profileInfo.textContent = result.about;
+    userData.setUserInfo(result.name, result.about, result.avatar);
     popupEditProfile.close();
   })
   .catch((error) => {
@@ -146,7 +140,8 @@ function handleProfileImgFormSubmit(submissionData){
   popupButton.textContent = "Saving...";
   api.setUserAvatar(submissionData)
   .then((result) => {
-    profilePicture.src = result.avatar;
+    const userElement = userData.getUserInfo();
+    userData.setUserInfo(userElement.name, userElement.about, result.avatar);
     popupEditProfileImg.close();
   })
   .catch((error) => {
