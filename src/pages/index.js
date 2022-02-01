@@ -14,7 +14,7 @@ import Section from '../scripts/Section.js';
 
 //constants
 const openEditButton = document.querySelector('.profile__button_type_edit');
-const openEditImgButton = document.querySelector('.profile__button_type_edit-img');
+const openEditImgButton = document.querySelector('.profile__image-overlay');
 const openAddButton = document.querySelector('.profile__button_type_add-image');
 const profileName = document.querySelector('.profile__name');
 const profileInfo = document.querySelector('.profile__info');
@@ -102,6 +102,7 @@ api.getInitialCards()
 popupAddCard.setEventListeners();
 popupImage.setEventListeners();
 
+
 openEditButton.addEventListener('click', () => {
   popupEditProfile.open();
   const userElement = userData.getUserInfo();
@@ -129,12 +130,14 @@ function handleProfileFormSubmit(submissionData){
     userData.setUserInfo(result.name, result.about);
     profileName.textContent = result.name;
     profileInfo.textContent = result.about;
+    popupEditProfile.close();
   })
   .catch((error) => {
     console.log(error);
+  })
+  .finally(() => {
+    popupButton.textContent = "Save";
   });
-  popupButton.textContent = "Save";
-  popupEditProfile.close();
 }
 
 function handleProfileImgFormSubmit(submissionData){
@@ -144,12 +147,14 @@ function handleProfileImgFormSubmit(submissionData){
   api.setUserAvatar(submissionData)
   .then((result) => {
     profilePicture.src = result.avatar;
+    popupEditProfileImg.close();
   })
   .catch((error) => {
     console.log(error);
+  })
+  .finally(() => {
+    popupButton.textContent = "Save";
   });
-  popupButton.textContent = "Save";
-  popupEditProfileImg.close();
 }
 
 
@@ -161,12 +166,15 @@ function handleAddCardFormSubmit(cardData){
   .then((result) => {
     const card = new Card(result, cardTemplate, openImage, userId, handleDeletePopup, handleLikeBtn);
     cardList.addItem(card.createCard());
+    popupAddCard.close();
   })
   .catch((error) => {
     console.log(error);
   })
-  popupButton.textContent = "Create";
-  popupAddCard.close();
+  .finally(() => {
+    popupButton.textContent = "Create";
+  });
+  
 }
 
 function handleDeletePopup(cardId, cardElement) {
@@ -183,13 +191,13 @@ function handleDeleteCard(cardId, cardElement) {
   .then((result) => {
     cardElement.remove();
     cardElement = null;
+    popupDeleteCard.close();
   })
   .catch((error) => {
     console.log(error);
   })
   .finally(() => {
     popupButton.textContent = "Yes";
-    popupDeleteCard.close();
   })
 }
 
@@ -200,6 +208,7 @@ function handleLikeBtn(cardId, cardElement, likes) {
   if(likeButton.classList.contains('image-card__love-button_active')) {
     api.toggleLike(cardId, false)
     .then((result) => {
+      likeButton.classList.toggle('image-card__love-button_active');
       likeCounter.textContent = result.likes.length;
       likesArr = result.likes;
     })
@@ -209,6 +218,7 @@ function handleLikeBtn(cardId, cardElement, likes) {
   } else {
     api.toggleLike(cardId, true)
     .then((result) => {
+      likeButton.classList.toggle('image-card__love-button_active');
       likeCounter.textContent = result.likes.length;
       likesArr = result.likes;
     })

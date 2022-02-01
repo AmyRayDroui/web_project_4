@@ -52,7 +52,6 @@ export default class Card {
 
   _handleLike = (evt) => {
     this._likes = this._handleLikeButton(this._cardId, this._cardElement, this._likes);
-    evt.target.classList.toggle('image-card__love-button_active');
   }
 
   _handlePopup = () => {
