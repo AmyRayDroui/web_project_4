@@ -3,7 +3,7 @@ import Popup from "./Popup.js";
 export default class PopupWithVerification extends Popup {
   constructor(handleVerification, popupSelector, id, element) {
     super(popupSelector);
-    this._saveBtn = this._popupSelector.querySelector('.popup__save-button');
+    this._submitButton = this._popup.querySelector('.popup__save-button');
     this._handleVerification = handleVerification;
     this._id = id;
     this._element = element;
@@ -11,7 +11,11 @@ export default class PopupWithVerification extends Popup {
   
   setEventListeners() {
     super.setEventListeners();
-    this._saveBtn.addEventListener('click', this._handleVerificationFunc);
+    this._submitButton.addEventListener('click', this._handleVerificationFunc);
+  }
+
+  renderLoading(isLoading, loadingText) {
+    this._submitButton.textContent = loadingText;
   }
 
   _handleVerificationFunc = () => {

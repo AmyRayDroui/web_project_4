@@ -5,18 +5,23 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._handleSubmission = handleSubmission;
 
-    this._inputList = this._popupSelector.querySelectorAll('.popup__input');
-    this._form = this._popupSelector.querySelector('.popup__form');
+    this._inputList = this._popup.querySelectorAll('.popup__input');
+    this._form = this._popup.querySelector('.popup__form');
+    this._submitButton = this._popup.querySelector('.popup__save-button');
   }
 
   close() {
-    super.close();
     this._form.reset();
+    super.close();
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._popupSelector.addEventListener('submit', this._handleSubmissionFunc);
+    this._popup.addEventListener('submit', this._handleSubmissionFunc);
+  }
+
+  renderLoading(isLoading, loadingText) {
+    this._submitButton.textContent = loadingText;
   }
 
   _handleSubmissionFunc = (evt) => {
